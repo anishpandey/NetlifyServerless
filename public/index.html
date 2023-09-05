@@ -10,17 +10,26 @@
     <h1>Up and Running with Serverless Functions</h1>
     <button id="fetch-btn">Fetch</button>
     <button id="fetch-pokedex-btn">Fetch Pokedex</button>
+    <button id="test-btn">Test</button>
     <p id="response-output">Response Placeholder</p>
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const fetchBtn = document.getElementById('fetch-btn')
         const fetchPokedexBtn = document.getElementById('fetch-pokedex-btn')
+        const testBtn = document.getElementById('test-btn')
 
         const responseText = document.getElementById('response-output')
 
         fetchBtn.addEventListener('click', async () => {
           const response = await fetch('/.netlify/functions/hello-world')
+		        .then(response => response.json()
+	          )
+            responseText.innerText = JSON.stringify(response)
+        })
+
+        testBtn.addEventListener('click', async () => {
+          const response = await fetch('/.netlify/functions/test')
 		        .then(response => response.json()
 	          )
             responseText.innerText = JSON.stringify(response)
